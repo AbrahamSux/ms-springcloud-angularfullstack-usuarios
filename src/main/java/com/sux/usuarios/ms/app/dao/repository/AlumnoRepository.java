@@ -17,5 +17,16 @@ import org.springframework.stereotype.Repository;
  * @version 0.2
  */
 @Repository("alumnoRepository")
-public interface AlumnoRepository extends JpaRepository<Alumno, Long> {
+public interface AlumnoRepository extends JpaRepository<Alumno, Integer> {
+
+
+
+    /**
+     * Método encargado de obtener al Alumno correspondiente del identificador recibido.
+     *
+     * @param identificador Identificador del Alumno.
+     * @return Objeto de tipo Alumno.
+     */
+    Alumno findById(Long identificador);
+
 }
