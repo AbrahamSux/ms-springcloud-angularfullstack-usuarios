@@ -21,13 +21,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Optional;
+
 /**
  * @name AlumnoController
  * @description Clase que expone el servicio REST para las operaciones relacionadas con el alumno.
  *
  * @author Abraham Juárez de la Cruz - ajuarezdelacruz93@gmail.com
  * @creationDate 23/10/2021 10:42 PM
- * @version 0.1
+ * @version 0.2
  */
 @RestController
 @RequestMapping("/usuarios")
@@ -66,9 +68,9 @@ public class AlumnoController {
             LOGGER.info(">>> obtenerAlumno( {} )", identificador);
         }
 
-        AlumnoDTO alumnoDTO = alumnoService.findById(identificador);
+        Optional<AlumnoDTO> alumnoDTO = alumnoService.findById(identificador);
 
-        if (alumnoDTO == null) {
+        if (!alumnoDTO.isPresent()) {
             return ResponseEntity.notFound().build();
         }
 
@@ -94,12 +96,13 @@ public class AlumnoController {
             LOGGER.info(">>> editarAlumno( {}, {} )", alumno.toString(), identificador);
         }
 
-        AlumnoDTO alumnoDTO = alumnoService.findById(identificador);
+        Optional<AlumnoDTO> optional = alumnoService.findById(identificador);
 
-        if (alumnoDTO == null) {
+        if (!optional.isPresent()) {
             return ResponseEntity.notFound().build();
         }
 
+        AlumnoDTO alumnoDTO = new AlumnoDTO();
         alumnoDTO.setNombreAlumno(alumno.getNombreAlumno());
         alumnoDTO.setApellidoPaterno(alumno.getApellidoPaterno());
         alumnoDTO.setApellidoMaterno(alumno.getApellidoMaterno());

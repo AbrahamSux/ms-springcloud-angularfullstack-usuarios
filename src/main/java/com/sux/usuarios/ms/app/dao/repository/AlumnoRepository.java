@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author Abraham Juárez de la Cruz - ajuarezdelacruz93@gmail.com
  * @creationDate 23/10/2021 08:03 PM
- * @version 0.2
+ * @version 0.3
  */
 @Repository("alumnoRepository")
 public interface AlumnoRepository extends JpaRepository<Alumno, Integer> {
@@ -27,6 +27,6 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Integer> {
      * @param identificador Identificador del Alumno.
      * @return Objeto de tipo Alumno.
      */
-    Alumno findById(Long identificador);
+    // Alumno findById(Long identificador);
 
 }

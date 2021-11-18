@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @name AlumnoService
@@ -25,7 +26,7 @@ import java.util.List;
  *
  * @author Abraham Juárez de la Cruz - ajuarezdelacruz93@gmail.com
  * @creationDate 23/10/2021 09:45 PM
- * @version 0.1
+ * @version 0.2
  */
 @Service("alumnoServiceImpl")
 public class AlumnoServiceImpl implements AlumnoService {
@@ -67,21 +68,22 @@ public class AlumnoServiceImpl implements AlumnoService {
 
     @Override
     @Transactional(readOnly = true)
-    public AlumnoDTO findById(Long identificador) {
+    public Optional<AlumnoDTO> findById(Long identificador) {
 
         if (LOGGER.isInfoEnabled()) {
             LOGGER.info(">>> findById( {} )", identificador);
         }
 
-        Alumno alumno = alumnoRepository.findById(identificador);
+        Optional<Alumno> alumno = alumnoRepository.findById(Math.toIntExact(identificador));
 
-        AlumnoDTO alumnoDTO = AlumnoBuilder.buildAlumnoDTOFromAlumno(alumno);
+        AlumnoDTO alumnoDTO = AlumnoBuilder.buildAlumnoDTOFromAlumno(alumno.orElseGet(Alumno::new));
+        Optional<AlumnoDTO> optionalAlumnoDTO = Optional.of(alumnoDTO);
 
         if (LOGGER.isInfoEnabled()) {
             LOGGER.info("Alumno DTO : " + alumnoDTO.toString());
         }
 
-        return alumnoDTO;
+        return optionalAlumnoDTO;
     }
 
     @Override
@@ -113,9 +115,9 @@ public class AlumnoServiceImpl implements AlumnoService {
 
         boolean response = Boolean.FALSE;
 
-        Alumno alumno = alumnoRepository.findById(identificador);
+        Optional<Alumno> alumno = alumnoRepository.findById(Math.toIntExact(identificador));
 
-        if (alumno != null) {
+        if (alumno.isPresent()) {
             alumnoRepository.deleteById(Math.toIntExact(identificador));
             response = Boolean.TRUE;
         }

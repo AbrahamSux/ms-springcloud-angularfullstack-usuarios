@@ -8,6 +8,7 @@ import com.sux.usuarios.ms.app.models.dto.AlumnoDTO;
 import com.sux.usuarios.ms.app.models.entity.Alumno;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @name AlumnoService
@@ -15,7 +16,7 @@ import java.util.List;
  *
  * @author Abraham Juárez de la Cruz - ajuarezdelacruz93@gmail.com
  * @creationDate 23/10/2021 08:34 PM
- * @version 0.1
+ * @version 0.2
  */
 public interface AlumnoService {
 
@@ -32,7 +33,7 @@ public interface AlumnoService {
      * @param identificador Identificador del Alumno.
      * @return Objeto de tipo AlumnoDTO.
      */
-    AlumnoDTO findById(Long identificador);
+    Optional<AlumnoDTO> findById(Long identificador);
 
     /**
      * Método encargado de mandar a guardar al objeto de tipo AlumnoDTO recibido.
