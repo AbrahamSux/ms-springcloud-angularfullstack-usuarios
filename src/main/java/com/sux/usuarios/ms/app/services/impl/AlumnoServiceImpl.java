@@ -26,7 +26,7 @@ import java.util.Optional;
  *
  * @author Abraham Juárez de la Cruz - ajuarezdelacruz93@gmail.com
  * @creationDate 23/10/2021 09:45 PM
- * @version 0.2
+ * @version 0.3
  */
 @Service("alumnoServiceImpl")
 public class AlumnoServiceImpl implements AlumnoService {
@@ -57,9 +57,7 @@ public class AlumnoServiceImpl implements AlumnoService {
 
         if (LOGGER.isInfoEnabled()) {
             if (alumnosDTOList != null) {
-                for (AlumnoDTO alumnoDTO: alumnosDTOList) {
-                    LOGGER.info("AlumnoDTO : {}", alumnoDTO.toString());
-                }
+                alumnosDTOList.forEach( alumno -> LOGGER.info("AlumnoDTO : {}", alumno.toString()) );
             }
         }
 
@@ -74,7 +72,11 @@ public class AlumnoServiceImpl implements AlumnoService {
             LOGGER.info(">>> findById( {} )", identificador);
         }
 
-        Optional<Alumno> alumno = alumnoRepository.findById(Math.toIntExact(identificador));
+        Optional<Alumno> alumno = alumnoRepository.findById(identificador);
+
+        if (!alumno.isPresent()) {
+            return Optional.empty();
+        }
 
         AlumnoDTO alumnoDTO = AlumnoBuilder.buildAlumnoDTOFromAlumno(alumno.orElseGet(Alumno::new));
         Optional<AlumnoDTO> optionalAlumnoDTO = Optional.of(alumnoDTO);
@@ -115,13 +117,12 @@ public class AlumnoServiceImpl implements AlumnoService {
 
         boolean response = Boolean.FALSE;
 
-        Optional<Alumno> alumno = alumnoRepository.findById(Math.toIntExact(identificador));
+        Optional<Alumno> alumno = alumnoRepository.findById(identificador);
 
         if (alumno.isPresent()) {
-            alumnoRepository.deleteById(Math.toIntExact(identificador));
+            alumnoRepository.deleteById(identificador);
             response = Boolean.TRUE;
         }
-
 
         return response;
     }

@@ -14,10 +14,10 @@ import org.springframework.stereotype.Repository;
  *
  * @author Abraham Juárez de la Cruz - ajuarezdelacruz93@gmail.com
  * @creationDate 23/10/2021 08:03 PM
- * @version 0.3
+ * @version 0.4
  */
 @Repository("alumnoRepository")
-public interface AlumnoRepository extends JpaRepository<Alumno, Integer> {
+public interface AlumnoRepository extends JpaRepository<Alumno, Long> {
 
 
 

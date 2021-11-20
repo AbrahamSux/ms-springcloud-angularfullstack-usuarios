@@ -12,44 +12,44 @@ import java.util.Date;
  *
  * @author Abraham Juárez de la Cruz - ajuarezdelacruz93@gmail.com
  * @creationDate 23/10/2021 08:48 PM
- * @version 0.1
+ * @version 0.2
  */
 public class AlumnoDTO {
 
-    private Long idAlumno;
-    private String nombreAlumno;
+    private Long id;
+    private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
-    private String emailAlumno;
-    private Date createAtAlumno;
+    private String email;
+    private Date createAt;
 
     public AlumnoDTO() {
     }
 
-    public AlumnoDTO(Long idAlumno, String nombreAlumno, String apellidoPaterno, String apellidoMaterno,
-                     String emailAlumno, Date createAtAlumno) {
-        this.idAlumno = idAlumno;
-        this.nombreAlumno = nombreAlumno;
+    public AlumnoDTO(Long id, String nombre, String apellidoPaterno, String apellidoMaterno,
+                     String email, Date createAt) {
+        this.id = id;
+        this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
-        this.emailAlumno = emailAlumno;
-        this.createAtAlumno = createAtAlumno;
+        this.email = email;
+        this.createAt = createAt;
     }
 
-    public Long getIdAlumno() {
-        return idAlumno;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdAlumno(Long idAlumno) {
-        this.idAlumno = idAlumno;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getNombreAlumno() {
-        return nombreAlumno;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreAlumno(String nombreAlumno) {
-        this.nombreAlumno = nombreAlumno;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getApellidoPaterno() {
@@ -68,31 +68,31 @@ public class AlumnoDTO {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public String getEmailAlumno() {
-        return emailAlumno;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailAlumno(String emailAlumno) {
-        this.emailAlumno = emailAlumno;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public Date getCreateAtAlumno() {
-        return createAtAlumno;
+    public Date getCreateAt() {
+        return createAt;
     }
 
-    public void setCreateAtAlumno(Date createAtAlumno) {
-        this.createAtAlumno = createAtAlumno;
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
     }
 
     @Override
     public String toString() {
         return "AlumnoDTO{" +
-                "idAlumno=" + idAlumno +
-                ", nombreAlumno='" + nombreAlumno + '\'' +
+                "idAlumno=" + id +
+                ", nombreAlumno='" + nombre + '\'' +
                 ", apellidoPaterno='" + apellidoPaterno + '\'' +
                 ", apellidoMaterno='" + apellidoMaterno + '\'' +
-                ", emailAlumno='" + emailAlumno + '\'' +
-                ", createAtAlumno=" + createAtAlumno +
+                ", emailAlumno='" + email + '\'' +
+                ", createAtAlumno=" + createAt +
                 '}';
     }
 

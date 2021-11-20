@@ -4,6 +4,7 @@
  */
 package com.sux.usuarios.ms.app.controllers;
 
+import com.sux.usuarios.ms.app.builder.AlumnoBuilder;
 import com.sux.usuarios.ms.app.models.dto.AlumnoDTO;
 import com.sux.usuarios.ms.app.services.AlumnoService;
 import org.slf4j.Logger;
@@ -29,10 +30,10 @@ import java.util.Optional;
  *
  * @author Abraham Juárez de la Cruz - ajuarezdelacruz93@gmail.com
  * @creationDate 23/10/2021 10:42 PM
- * @version 0.2
+ * @version 0.3
  */
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/alumnos/app")
 public class AlumnoController {
 
     /**
@@ -49,7 +50,7 @@ public class AlumnoController {
 
     // METODOS
 
-    @GetMapping
+    @GetMapping("/alumnos")
     public ResponseEntity<?> obtenerListaAlumnos() {
 
         if (LOGGER.isInfoEnabled()) {
@@ -61,7 +62,7 @@ public class AlumnoController {
         return ResponseEntity.ok().body(listAlumnos);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/obtener/{id}")
     public ResponseEntity<?> obtenerAlumno(@PathVariable(name = "id") Long identificador) {
 
         if (LOGGER.isInfoEnabled()) {
@@ -77,7 +78,7 @@ public class AlumnoController {
         return ResponseEntity.ok(alumnoDTO);
     }
 
-    @PostMapping
+    @PostMapping("/alumno")
     public ResponseEntity<?> guardarAlumno(@RequestBody AlumnoDTO alumno) {
 
         if (LOGGER.isInfoEnabled()) {
@@ -89,7 +90,7 @@ public class AlumnoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(alumnoDTO);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/alumno/{id}")
     public ResponseEntity<?> editarAlumno(@RequestBody AlumnoDTO alumno, @PathVariable(name = "id") Long identificador) {
 
         if (LOGGER.isInfoEnabled()) {
@@ -98,20 +99,18 @@ public class AlumnoController {
 
         Optional<AlumnoDTO> optional = alumnoService.findById(identificador);
 
-        if (!optional.isPresent()) {
-            return ResponseEntity.notFound().build();
+        if (optional.isPresent()) {
+            AlumnoDTO alumnoDTO = AlumnoBuilder.buildAlumnoDTOUpdatedforAlumnoOptional(optional, alumno);
+
+            if (alumno != null) {
+                return ResponseEntity.status(HttpStatus.CREATED).body(alumnoService.save(alumnoDTO));
+            }
         }
 
-        AlumnoDTO alumnoDTO = new AlumnoDTO();
-        alumnoDTO.setNombreAlumno(alumno.getNombreAlumno());
-        alumnoDTO.setApellidoPaterno(alumno.getApellidoPaterno());
-        alumnoDTO.setApellidoMaterno(alumno.getApellidoMaterno());
-        alumnoDTO.setEmailAlumno(alumno.getEmailAlumno());
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(alumnoService.save(alumnoDTO));
+        return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<?> eliminarAlumno(@PathVariable(name = "id") Long identificador) {
 
         if (LOGGER.isInfoEnabled()) {
