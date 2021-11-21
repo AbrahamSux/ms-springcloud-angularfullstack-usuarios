@@ -26,11 +26,11 @@ import java.util.Optional;
 
 /**
  * @name AlumnoController
- * @description Clase que expone el servicio REST para las operaciones relacionadas con el alumno.
+ * @description Clase que expone el servicio REST para las operaciones relacionadas con los Alumnos.
  *
  * @author Abraham Juárez de la Cruz - ajuarezdelacruz93@gmail.com
  * @creationDate 23/10/2021 10:42 PM
- * @version 0.3
+ * @version 0.4
  */
 @RestController
 @RequestMapping("/alumnos/app")
@@ -100,9 +100,9 @@ public class AlumnoController {
         Optional<AlumnoDTO> optional = alumnoService.findById(identificador);
 
         if (optional.isPresent()) {
-            AlumnoDTO alumnoDTO = AlumnoBuilder.buildAlumnoDTOUpdatedforAlumnoOptional(optional, alumno);
+            AlumnoDTO alumnoDTO = AlumnoBuilder.buildAlumnoDTOUpdatedForAlumnoOptional(optional, alumno);
 
-            if (alumno != null) {
+            if (alumnoDTO != null) {
                 return ResponseEntity.status(HttpStatus.CREATED).body(alumnoService.save(alumnoDTO));
             }
         }
@@ -119,7 +119,9 @@ public class AlumnoController {
 
         boolean response = alumnoService.deleteById(identificador);
 
-        return ResponseEntity.ok(response);
+
+
+        return ResponseEntity.status(response ? HttpStatus.OK : HttpStatus.NOT_FOUND).body(response);
     }
 
 }

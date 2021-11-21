@@ -20,13 +20,13 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * @name AlumnoService
+ * @name AlumnoServiceImpl
  * @description Implementación de la interface {@link AlumnoService} que define las operaciones realizar sobre
  * la entidad {@link Alumno}.
  *
  * @author Abraham Juárez de la Cruz - ajuarezdelacruz93@gmail.com
  * @creationDate 23/10/2021 09:45 PM
- * @version 0.3
+ * @version 0.4
  */
 @Service("alumnoServiceImpl")
 public class AlumnoServiceImpl implements AlumnoService {

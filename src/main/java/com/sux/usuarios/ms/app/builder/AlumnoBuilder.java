@@ -17,7 +17,7 @@ import java.util.Optional;
  *
  * @author Abraham Juárez de la Cruz - ajuarezdelacruz93@gmail.com
  * @creationDate 23/10/2021 08:43 PM
- * @version 0.3
+ * @version 0.4
  */
 public class AlumnoBuilder {
 
@@ -71,20 +71,20 @@ public class AlumnoBuilder {
     /**
      * Método que construye un entity Alumno a partir de un objeto tipo AlumnoDTO.
      *
-     * @param clienteDTO Objeto AlumnoDTO.
+     * @param alumnoDTO Objeto AlumnoDTO.
      * @return Entidad Alumno.
      */
-    public static Alumno buildAlumnoFromAlumnoDTO(AlumnoDTO clienteDTO) {
+    public static Alumno buildAlumnoFromAlumnoDTO(AlumnoDTO alumnoDTO) {
         Alumno alumnoEntity = null;
 
-        if (null != clienteDTO) {
+        if (null != alumnoDTO) {
             alumnoEntity = new Alumno();
-            alumnoEntity.setId(clienteDTO.getId());
-            alumnoEntity.setNombre(clienteDTO.getNombre());
-            alumnoEntity.setApellidoPaterno(clienteDTO.getApellidoPaterno());
-            alumnoEntity.setApellidoMaterno(clienteDTO.getApellidoMaterno());
-            alumnoEntity.setEmail(clienteDTO.getEmail());
-            alumnoEntity.setCreateAt( clienteDTO.getId() != null ? clienteDTO.getCreateAt() : null );
+            alumnoEntity.setId(alumnoDTO.getId());
+            alumnoEntity.setNombre(alumnoDTO.getNombre());
+            alumnoEntity.setApellidoPaterno(alumnoDTO.getApellidoPaterno());
+            alumnoEntity.setApellidoMaterno(alumnoDTO.getApellidoMaterno());
+            alumnoEntity.setEmail(alumnoDTO.getEmail());
+            alumnoEntity.setCreateAt( alumnoDTO.getId() != null ? alumnoDTO.getCreateAt() : null );
         }
 
         return alumnoEntity;
@@ -97,7 +97,7 @@ public class AlumnoBuilder {
      * @param alumnoDTO Objeto de tipo AlumnoDTO.
      * @return Objeto AlumnoDTO
      */
-    public static AlumnoDTO buildAlumnoDTOUpdatedforAlumnoOptional(Optional<AlumnoDTO> optional, AlumnoDTO alumnoDTO) {
+    public static AlumnoDTO buildAlumnoDTOUpdatedForAlumnoOptional(Optional<AlumnoDTO> optional, AlumnoDTO alumnoDTO) {
         AlumnoDTO alumnoDTOUpdated = null;
 
         if (optional.isPresent() && alumnoDTO!=null) {
